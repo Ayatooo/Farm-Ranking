@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 
 public class EditPointCommand implements CommandExecutor {
 
@@ -20,23 +21,26 @@ public class EditPointCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String arg, String[] args) {
-        if (args.length == 3 && StringUtils.isNumeric(args[2])) {
-            if (!factionExist(args[1])) {
-                commandSender.sendMessage((Main.getInstance()).loadConfig.factionDoesNotExist);
-            }
-            if (args[0].equalsIgnoreCase("add")) {
-                ClassementUtils.add(args[1], Integer.parseInt(args[2]));
-                commandSender.sendMessage((Main.getInstance()).loadConfig.pointAdded.replace("%point%", "" + args[2]).replace("%faction%", args[1]));
-            } else {
 
-                if (!args[0].equalsIgnoreCase("set")) {
-                    commandSender.sendMessage((Main.getInstance()).loadConfig.usage);
-                    return false;
+        if (commandSender.hasPermission("farmpoint.set") || commandSender instanceof ConsoleCommandSender) {
+            if (args.length == 3 && StringUtils.isNumeric(args[2])) {
+                if (!factionExist(args[1])) {
+                    commandSender.sendMessage((Main.getInstance()).loadConfig.factionDoesNotExist);
                 }
-                ClassementUtils.set(args[1], Integer.parseInt(args[2]));
-                commandSender.sendMessage((Main.getInstance()).loadConfig.pointSet.replace("%point%", "" + args[2]).replace("%faction%", args[1]));
+                if (args[0].equalsIgnoreCase("add")) {
+                    ClassementUtils.add(args[1], Integer.parseInt(args[2]));
+                    commandSender.sendMessage((Main.getInstance()).loadConfig.pointAdded.replace("%point%", "" + args[2]).replace("%faction%", args[1]));
+                } else {
+
+                    if (!args[0].equalsIgnoreCase("set")) {
+                        commandSender.sendMessage((Main.getInstance()).loadConfig.usage);
+                        return false;
+                    }
+                    ClassementUtils.set(args[1], Integer.parseInt(args[2]));
+                    commandSender.sendMessage((Main.getInstance()).loadConfig.pointSet.replace("%point%", "" + args[2]).replace("%faction%", args[1]));
+                }
+                return true;
             }
-            return true;
         }
         commandSender.sendMessage((Main.getInstance()).loadConfig.usage);
         return false;

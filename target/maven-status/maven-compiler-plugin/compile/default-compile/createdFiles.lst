@@ -2,10 +2,11 @@ fr\ayato\farmranking\utils\config\ConfigJSON.class
 fr\ayato\farmranking\Main.class
 fr\ayato\farmranking\utils\FactionObject.class
 fr\ayato\farmranking\utils\config\ConfStorage.class
-fr\ayato\farmranking\menu\LaunchMenu.class
 fr\ayato\farmranking\utils\events\FactionEvents.class
+fr\ayato\farmranking\menu\RankingMenu.class
 fr\ayato\farmranking\utils\ClassementUtils.class
 fr\ayato\farmranking\menu\MenuInterract.class
 fr\ayato\farmranking\menu\LoreFarm.class
 fr\ayato\farmranking\utils\InventoryInstance.class
 fr\ayato\farmranking\utils\commands\EditPointCommand.class
+fr\ayato\farmranking\BuyPoints.class

@@ -1,18 +1,87 @@
 package fr.ayato.farmranking.menu;
 
+import com.massivecraft.factions.FPlayers;
+import fr.ayato.farmranking.BuyPoints;
+import fr.ayato.farmranking.Main;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
-public class MenuInterract implements Listener
-{
+public class MenuInterract implements Listener {
+
+    private final ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+    String command;
+    String command2;
+
     @EventHandler
-    public void interractMenu(InventoryClickEvent e) {
+    public void interractFarmMenu(InventoryClickEvent e) {
         Inventory inv = e.getInventory();
+        Player player = (Player) e.getWhoClicked();
 
         if(inv.getName().contains("Top Farm")) {
-            e.setCancelled(true);
+            if (e.getCurrentItem().getType() == Material.NETHER_STAR) {
+                player.closeInventory();
+                BuyPoints.buyingMenu(player);
+            } else if (e.getCurrentItem().getType() == Material.WOOD_DOOR) {
+                player.closeInventory();
+            }
+        }
+        e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void interractBuyingMenu(InventoryClickEvent e) {
+        Inventory inv = e.getInventory();
+        ItemStack current = e.getCurrentItem();
+        Player player = (Player)e.getWhoClicked();
+        int i = 0;
+        int value = 0;
+
+        if (current == null)
+            return;  if (!current.hasItemMeta())
+            return;  if (inv.getName().contains("Achat de points Farm")) {
+            if (current.hasItemMeta()) {
+                if (current.getItemMeta().getDisplayName().equalsIgnoreCase("§b§l1 Point Farm")) {
+                    if (Main.getEconomy().has(player, 1000001.0D)) {
+                        i = 1;
+                        value = 1000000;
+                        this.command = "eco take " + player.getName() + " " + value;
+                        Bukkit.dispatchCommand(this.console, this.command);
+                        player.sendMessage("§e§lIdalia§b§lMc §f» §eTu viens d'acheter 1 point de Farm");
+                    }
+
+                } else if (current.getItemMeta().getDisplayName().equalsIgnoreCase("§b§l5 Points Farm")) {
+                    if (Main.getEconomy().has(player, 5000001.0D)) {
+                        i = 5;
+                        value = 5000000;
+                        this.command = "eco take " + player.getName() + " " + value;
+                        Bukkit.dispatchCommand(this.console, this.command);
+                        player.sendMessage("§e§lIdalia§b§lMc §f» §eTu viens d'acheter 5 points de Farm");
+                    }
+                } else if (current.getItemMeta().getDisplayName().equalsIgnoreCase("§b§l15 Points Farm") &&
+                        Main.getEconomy().has(player, 1.5000001E7D)) {
+                    i = 15;
+                    value = 15000000;
+                    this.command = "eco take " + player.getName() + " " + value;
+                    Bukkit.dispatchCommand(this.console, this.command);
+                    player.sendMessage("§e§lIdalia§b§lMc §f» §eTu viens d'acheter 15 points de Farm");
+                }
+
+                e.setCancelled(true);
+            }
+            if (i != 0) {
+                this.command2 = "farmpoint add " + FPlayers.getInstance().getByPlayer(player).getFaction().getTag() + " " + i;
+                Bukkit.dispatchCommand(this.console, this.command2);
+            } else {
+                e.setCancelled(true);
+                player.sendMessage("§e§lIdalia§b§lMc §f» §cTu n'as pas assez d'argent !");
+            }
         }
     }
 }

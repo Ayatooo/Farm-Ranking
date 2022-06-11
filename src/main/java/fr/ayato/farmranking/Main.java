@@ -1,6 +1,7 @@
 package fr.ayato.farmranking;
 
-import fr.ayato.farmranking.menu.LaunchMenu;
+import fr.ayato.farmranking.menu.RankingMenu;
+import fr.ayato.farmranking.menu.MenuInterract;
 import fr.ayato.farmranking.utils.commands.EditPointCommand;
 import fr.ayato.farmranking.utils.config.ConfStorage;
 import fr.ayato.farmranking.utils.config.ConfigJSON;
@@ -30,11 +31,12 @@ public class Main extends JavaPlugin {
         if (!this.configStorage.configExist())
             this.configStorage.saveDefaultConfig();
         this.configStorage.loadConfig();
-        getCommand("farm").setExecutor(new LaunchMenu());
+        getCommand("farm").setExecutor(new RankingMenu());
         getCommand("farmpoint").setExecutor(new EditPointCommand());
         getServer().getPluginManager().registerEvents(new FactionEvents(), this);
+        getServer().getPluginManager().registerEvents(new MenuInterract(), this);
+
         setupEconomy();
-        //getServer().getPluginManager().registerEvents((Listener)new MenuInterract(), this);
     }
 
     public void onDisable() {
@@ -52,5 +54,9 @@ public class Main extends JavaPlugin {
             return false;
         econ = rsp.getProvider();
         return (econ != null);
+    }
+
+    public static Economy getEconomy() {
+        return econ;
     }
 }

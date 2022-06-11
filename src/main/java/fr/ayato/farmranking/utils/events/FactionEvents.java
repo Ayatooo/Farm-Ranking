@@ -18,14 +18,6 @@ public class FactionEvents implements Listener {
         System.out.println("Faction créée : " + e.getFaction().getTag());
         (Main.getInstance()).loadConfig.factionList.add(new FactionObject(0, e.getFaction().getTag()));
         ClassementUtils.sortList();
-        //print the list of factions
-        if ((Main.getInstance()).loadConfig.factionList.size() != 0) {
-            for (int i = 0; i != (Main.getInstance()).loadConfig.factionList.size(); i++) {
-                System.out.println("Faction " + i + " : " + (Main.getInstance()).loadConfig.factionList.get(i).factionName + " - " + (Main.getInstance()).loadConfig.factionList.get(i).points);
-            }
-        } else {
-            System.out.println("Aucune faction");
-        }
     }
 
     @EventHandler
@@ -33,14 +25,6 @@ public class FactionEvents implements Listener {
         System.out.println("Faction supprimée : " + e.getFaction().getTag());
         (Main.getInstance()).loadConfig.factionList.remove(ClassementUtils.getFactionObject(e.getFaction().getTag()));
         ClassementUtils.sortList();
-        //print the list of factions
-        if ((Main.getInstance()).loadConfig.factionList.size() != 0) {
-            for (int i = 0; i != (Main.getInstance()).loadConfig.factionList.size(); i++) {
-                System.out.println("Faction " + i + " : " + (Main.getInstance()).loadConfig.factionList.get(i).factionName + " - " + (Main.getInstance()).loadConfig.factionList.get(i).points);
-            }
-        } else {
-            System.out.println("Aucune faction");
-        }
     }
 
     @EventHandler
