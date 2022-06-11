@@ -1,13 +1,12 @@
 package fr.ayato.farmranking;
 
+import fr.ayato.farmranking.menu.LaunchMenu;
 import fr.ayato.farmranking.utils.commands.EditPointCommand;
 import fr.ayato.farmranking.utils.config.ConfStorage;
 import fr.ayato.farmranking.utils.config.ConfigJSON;
+import fr.ayato.farmranking.utils.events.FactionEvents;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.ChatColor;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.event.Listener;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -31,10 +30,11 @@ public class Main extends JavaPlugin {
         if (!this.configStorage.configExist())
             this.configStorage.saveDefaultConfig();
         this.configStorage.loadConfig();
+        getCommand("farm").setExecutor(new LaunchMenu());
         getCommand("farmpoint").setExecutor(new EditPointCommand());
-        //getCommand("farm").setExecutor((CommandExecutor)new LaunchMenu());
-        //getServer().getPluginManager().registerEvents((Listener)new MenuInterract(), this);
+        getServer().getPluginManager().registerEvents(new FactionEvents(), this);
         setupEconomy();
+        //getServer().getPluginManager().registerEvents((Listener)new MenuInterract(), this);
     }
 
     public void onDisable() {

@@ -13,6 +13,7 @@ public class ClassementUtils {
 
     public static void sortList() {
         (Main.getInstance()).loadConfig.factionList.sort((factionObject, factionObject1) -> factionObject1.points - factionObject.points);
+
     }
 
     public static void add(String factionName, int points) {

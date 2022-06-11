@@ -46,10 +46,10 @@ public class ConfStorage {
     public void loadConfig() {
         for (File f : Objects.requireNonNull(storageFile.listFiles())) {
             if (f.getName().equalsIgnoreCase("config.json")) {
-                (Main.getInstance()).loadedConfigfarm = deserialize(f);
-                if ((Main.getInstance()).loadedConfigfarm == null) {
+                (Main.getInstance()).loadConfig = deserialize(f);
+                if ((Main.getInstance()).loadConfig == null) {
                     System.out.println("[IdaliaMc] Error, Configuration was corrupted, loaded default config!");
-                    (Main.getInstance()).loadedConfigfarm = new ConfigJSON();
+                    (Main.getInstance()).loadConfig = new ConfigJSON();
                 }
                 return;
             }
@@ -74,7 +74,7 @@ public class ConfStorage {
     }
 
     public void saveConfig() {
-        ConfigJSON defaultConfig = (Main.getInstance()).loadedConfigfarm;
+        ConfigJSON defaultConfig = (Main.getInstance()).loadConfig;
         File file = new File(ConfStorage.storageFile, "config.json");
         try {
             if (!file.exists()) {
