@@ -1,0 +1,7 @@
+name: Farm-Ranking
+version: 1.0
+author: ayato__
+main: fr.ayato.farmranking.Main
+commands:
+  farm:
+    permissions: farm.use
