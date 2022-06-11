@@ -5,3 +5,5 @@ main: fr.ayato.farmranking.Main
 commands:
   farm:
     permissions: farm.use
+  farmpoint:
+    permissions: farmpoint.set

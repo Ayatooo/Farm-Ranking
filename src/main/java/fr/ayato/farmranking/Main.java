@@ -1,17 +1,21 @@
 package fr.ayato.farmranking;
 
+import fr.ayato.farmranking.utils.commands.EditPointCommand;
+import fr.ayato.farmranking.utils.config.ConfStorage;
+import fr.ayato.farmranking.utils.config.ConfigJSON;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.event.Listener;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
     private static Economy econ = null;
 
-    //public ConfigJSON loadedConfigpvp = null;
-    //public ConfigStorage configStoragepvp;
-    //public ConfigJSON loadedConfigfarm = null;
-    //public ConfStorage configStorage;
+    public ConfigJSON loadConfig = null;
+    public ConfStorage configStorage;
 
     public static Main instance;
     public static Main getInstance() {
@@ -23,12 +27,13 @@ public class Main extends JavaPlugin {
         System.out.println(ChatColor.AQUA + "Farm-Ranking initialized !");
         System.out.println("--------------------");
         instance = this;
-        //this.configStorage = new ConfStorage();
-        //if (!this.configStorage.configExist())
-        //    this.configStorage.saveDefaultConfig();
-        //this.configStorage.loadConfig();
+        this.configStorage = new ConfStorage();
+        if (!this.configStorage.configExist())
+            this.configStorage.saveDefaultConfig();
+        this.configStorage.loadConfig();
+        getCommand("farmpoint").setExecutor(new EditPointCommand());
         //getCommand("farm").setExecutor((CommandExecutor)new LaunchMenu());
-        //getServer().getPluginManager().registerEvents((Listener)new MenuInterract(), (Plugin)this);
+        //getServer().getPluginManager().registerEvents((Listener)new MenuInterract(), this);
         setupEconomy();
     }
 
@@ -36,7 +41,7 @@ public class Main extends JavaPlugin {
         System.out.println("--------------------");
         System.out.println(ChatColor.AQUA + "Farm-Ranking stopped !");
         System.out.println("--------------------");
-        //this.configStorage.saveConfig();
+        this.configStorage.saveConfig();
     }
 
     private boolean setupEconomy() {
