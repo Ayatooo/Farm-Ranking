@@ -54,11 +54,11 @@ public class RankingMenu implements CommandExecutor {
 
             for (int i = 0; i != 3; i++) {
                 if (i == 0) {
-                    topFaction1 = "§e§l" + factionList.get(i).factionName + "  |  §b§l" + factionList.get(i).points + " points";
+                    topFaction1 = "§d§l" + factionList.get(i).factionName + "  |  §b§l" + factionList.get(i).points + " points";
                 } else if (i == 1) {
-                    topFaction2 = "§e§l" + factionList.get(i).factionName + "  |  §b§l" + factionList.get(i).points + " points";
+                    topFaction2 = "§d§l" + factionList.get(i).factionName + "  |  §b§l" + factionList.get(i).points + " points";
                 } else if (i == 2) {
-                    topFaction3 = "§e§l" + factionList.get(i).factionName + "  |  §b§l" + factionList.get(i).points + " points";
+                    topFaction3 = "§d§l" + factionList.get(i).factionName + "  |  §b§l" + factionList.get(i).points + " points";
                 }
             }
 

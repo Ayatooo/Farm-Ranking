@@ -33,21 +33,19 @@ public class MenuInterract implements Listener {
             } else if (e.getCurrentItem().getType() == Material.WOOD_DOOR) {
                 player.closeInventory();
             }
+            e.setCancelled(true);
         }
-        e.setCancelled(true);
     }
 
     @EventHandler
     public void interractBuyingMenu(InventoryClickEvent e) {
         Inventory inv = e.getInventory();
         ItemStack current = e.getCurrentItem();
-        Player player = (Player)e.getWhoClicked();
+        Player player = (Player) e.getWhoClicked();
         int i = 0;
         int value = 0;
 
-        if (current == null)
-            return;  if (!current.hasItemMeta())
-            return;  if (inv.getName().contains("Achat de points Farm")) {
+        if (inv.getName().contains("Achat de points Farm")) {
             if (current.hasItemMeta()) {
                 if (current.getItemMeta().getDisplayName().equalsIgnoreCase("§b§l1 Point Farm")) {
                     if (Main.getEconomy().has(player, 10000001.0D)) {
@@ -57,7 +55,6 @@ public class MenuInterract implements Listener {
                         Bukkit.dispatchCommand(this.console, this.command);
                         player.sendMessage("§e§lIdalia§b§lMc §f» §eTu viens d'acheter 1 point de Farm");
                     }
-
                 } else if (current.getItemMeta().getDisplayName().equalsIgnoreCase("§b§l5 Points Farm")) {
                     if (Main.getEconomy().has(player, 50000001.0D)) {
                         i = 5;
@@ -66,28 +63,27 @@ public class MenuInterract implements Listener {
                         Bukkit.dispatchCommand(this.console, this.command);
                         player.sendMessage("§e§lIdalia§b§lMc §f» §eTu viens d'acheter 5 points de Farm");
                     }
-                } else if (current.getItemMeta().getDisplayName().equalsIgnoreCase("§b§l15 Points Farm") &&
-                        Main.getEconomy().has(player, 1.5000001E8D)) {
-                    i = 15;
-                    value = 150000000;
-                    this.command = "eco take " + player.getName() + " " + value;
-                    Bukkit.dispatchCommand(this.console, this.command);
-                    player.sendMessage("§e§lIdalia§b§lMc §f» §eTu viens d'acheter 15 points de Farm");
+                } else if (current.getItemMeta().getDisplayName().equalsIgnoreCase("§b§l15 Points Farm")) {
+                    if (Main.getEconomy().has(player, 1.5000001E8D)) {
+                        i = 15;
+                        value = 150000000;
+                        this.command = "eco take " + player.getName() + " " + value;
+                        Bukkit.dispatchCommand(this.console, this.command);
+                        player.sendMessage("§e§lIdalia§b§lMc §f» §eTu viens d'acheter 15 points de Farm");
+                    }
                 } else if (current.getType() == Material.WOOD_DOOR) {
                     i = 9;
                 }
-
+                if (i == 1 || i == 5 || i == 15) {
+                    this.command2 = "farmpoint add " + FPlayers.getInstance().getByPlayer(player).getFaction().getTag() + " " + i;
+                    Bukkit.dispatchCommand(this.console, this.command2);
+                } else if (i == 9) {
+                    player.closeInventory();
+                    openMenu(player);
+                } else {
+                    player.sendMessage("§e§lIdalia§b§lMc §f» §cTu n'as pas assez d'argent !");
+                }
                 e.setCancelled(true);
-            }
-            if (i == 1 || i == 5 || i == 15) {
-                this.command2 = "farmpoint add " + FPlayers.getInstance().getByPlayer(player).getFaction().getTag() + " " + i;
-                Bukkit.dispatchCommand(this.console, this.command2);
-            } else if (i == 9){
-                player.closeInventory();
-                openMenu(player);
-            } else {
-                e.setCancelled(true);
-                player.sendMessage("§e§lIdalia§b§lMc §f» §cTu n'as pas assez d'argent !");
             }
         }
     }
