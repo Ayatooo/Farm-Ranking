@@ -30,3 +30,5 @@ BuyingMenu :
       name: "§cRetour"
       lore:
         - " "
+RankingMenu :
+  title: "§e☆ §b§lRanking Farm §e☆"

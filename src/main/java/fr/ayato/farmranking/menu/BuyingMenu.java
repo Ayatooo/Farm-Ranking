@@ -1,6 +1,7 @@
 package fr.ayato.farmranking.menu;
 
 import fr.ayato.farmranking.Main;
+import fr.ayato.farmranking.data.GetBuyingMenuConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -13,13 +14,13 @@ public class BuyingMenu implements Listener {
 
     public static void openMenu(Player player) {
         //Get the data from the config file
-        int ItemsSize = Main.getBuyingMenuItemsSize();
-        int MenuSize = Main.getBuyingMenuSize();
-        List<String> name = Main.getBuyingMenuName();
-        List<Integer> place = Main.getBuyingMenuPlace();
-        List<String> material = Main.getBuyingMenuMaterial();
-        List<String> lore = Main.getBuyingMenuLore();
-        String title = Main.getInstance().getConfig().getString("BuyingMenu.title");
+        int ItemsSize = GetBuyingMenuConfig.getBuyingMenuItemsSize();
+        int MenuSize = GetBuyingMenuConfig.getBuyingMenuSize();
+        List<String> name = GetBuyingMenuConfig.getBuyingMenuName();
+        List<Integer> place = GetBuyingMenuConfig.getBuyingMenuPlace();
+        List<String> material = GetBuyingMenuConfig.getBuyingMenuMaterial();
+        List<String> lore = GetBuyingMenuConfig.getBuyingMenuLore();
+        String title = Main.instance.getConfig().getString("BuyingMenu.title");
 
         //Create the inventory
         Inventory buyPointsInv = Bukkit.createInventory(null, MenuSize, centerTitle(title));
