@@ -2,6 +2,7 @@ package fr.ayato.farmranking.menu;
 
 import com.massivecraft.factions.FPlayers;
 import fr.ayato.farmranking.Main;
+import fr.ayato.farmranking.data.GetRankingMenuConfig;
 import fr.ayato.farmranking.utils.FactionObject;
 import fr.ayato.farmranking.utils.InventoryInstance;
 import org.bukkit.Bukkit;
@@ -29,48 +30,38 @@ public class RankingMenu implements CommandExecutor {
     }
 
     public static void openMenu(Player player) {
-        int factionPoint = 0;
-        for (int i = 0; i != (Main.getInstance()).loadConfig.factionList.size(); i++) {
-            if (Objects.equals((Main.getInstance()).loadConfig.factionList.get(i).factionName, FPlayers.getInstance().getByPlayer(player).getFaction().getTag())) {
-                if ((Main.getInstance()).loadConfig.factionList.get(i).points == 0) {
-                    factionPoint = 0;
-                } else {
-                    factionPoint = (Main.getInstance()).loadConfig.factionList.get(i).points;
-                }
-            }
-        }
-        if ((Main.getInstance()).loadConfig.factionList.size() >= 3) {
+        int factionPoint = Utils.getFactionPoints(player);
+        int menuSize = GetRankingMenuConfig.getMenuSize();
+        int topFactionsSize = GetRankingMenuConfig.getTopFactionsSize();
 
+        if ((Main.getInstance()).loadConfig.factionList.size() >= topFactionsSize) {
             List<FactionObject> factionList = new ArrayList<>();
             for (int i = 0; i != (Main.getInstance()).loadConfig.factionList.size(); i++) {
                 factionList.add(new FactionObject((Main.getInstance()).loadConfig.factionList.get(i).points, (Main.getInstance()).loadConfig.factionList.get(i).factionName));
             }
-
             factionList.sort((o1, o2) -> o2.points - o1.points);
 
-            String topFaction1 = "";
-            String topFaction2 = "";
-            String topFaction3 = "";
+            String title = GetRankingMenuConfig.getRankingMenuTitle();
+            Inventory farmInventory = Bukkit.createInventory(null, menuSize, Utils.centerTitle(title));
 
-            for (int i = 0; i != 3; i++) {
-                if (i == 0) {
-                    topFaction1 = "§d§l" + factionList.get(i).factionName + "  |  §b§l" + factionList.get(i).points + " points";
-                } else if (i == 1) {
-                    topFaction2 = "§d§l" + factionList.get(i).factionName + "  |  §b§l" + factionList.get(i).points + " points";
-                } else if (i == 2) {
-                    topFaction3 = "§d§l" + factionList.get(i).factionName + "  |  §b§l" + factionList.get(i).points + " points";
-                }
+            for (int i = 1; i <= topFactionsSize; i++) {
+                String factionName = factionList.get(i - 1).factionName;
+                int factionPoints = factionList.get(i - 1).points;
+                String factionNamePrefix = GetRankingMenuConfig.getFactionNamePrefix();
+                String factionPointPrefix = GetRankingMenuConfig.getFactionPointPrefix();
+                String factionPointSuffix = GetRankingMenuConfig.getFactionPointSuffix();
+                Material TopFactionMaterial = GetRankingMenuConfig.getTopFactionMaterial(i);
+                List<String> TopFactionLore = GetRankingMenuConfig.getTopFactionLore(i);
+                int place = GetRankingMenuConfig.getTopFactionPlace(i);
+
+                InventoryInstance.addItemMenu(farmInventory, place, TopFactionMaterial, factionNamePrefix + factionName + factionPointPrefix + factionPoints + factionPointSuffix, (ArrayList<String>) TopFactionLore);
+
             }
-
-            String title = "§e☆ §b§lTop Farm §e☆";
-            Inventory farmInventory = Bukkit.createInventory(null, 45, centerTitle(title));
             ArrayList<String> lore4 = new ArrayList<>();
             lore4.add("§c§l↩");
             ArrayList<String> lore5 = new ArrayList<>();
             lore5.add("");
-            InventoryInstance.addItemMenu(farmInventory, 20, Material.EMERALD, topFaction1, LoreFarm.setLore1());
-            InventoryInstance.addItemMenu(farmInventory, 22, Material.DIAMOND, topFaction2, LoreFarm.setLore2());
-            InventoryInstance.addItemMenu(farmInventory, 24, Material.GOLD_INGOT, topFaction3, LoreFarm.setLore3());
+
             InventoryInstance.addItemMenu(farmInventory, 4, Material.PAPER, "§b§lTa faction possède §6§l" + factionPoint + " §bpoints !", lore5);
             InventoryInstance.addItemMenu(farmInventory, 40, Material.WOOD_DOOR, "§cRetour", lore4);
             InventoryInstance.addGlass(farmInventory, 0, Material.STAINED_GLASS_PANE, "§e☆");
@@ -86,21 +77,9 @@ public class RankingMenu implements CommandExecutor {
             InventoryInstance.addItemMenu(farmInventory, 42, Material.NETHER_STAR, "§eAcheter des points", lore5);
             InventoryInstance.addGlass(farmInventory, 43, Material.STAINED_GLASS_PANE, "§e☆");
             InventoryInstance.addGlass(farmInventory, 44, Material.STAINED_GLASS_PANE, "§e☆");
-            player.closeInventory();
             player.openInventory(farmInventory);
-        } else {
+        } else{
             player.sendMessage("§e§lIdalia§b§lMc §f» §cIl faut qu'au moins 3 factions existent !");
         }
     }
-
-    public static String centerTitle(String title) {
-        String spacer = "";
-        int spaces = 27 - ChatColor.stripColor(title).length();
-        for (int i = 0; i < spaces; i++) {
-            spacer = spacer + " ";
-        }
-        return spacer + title;
-    }
-
-
 }

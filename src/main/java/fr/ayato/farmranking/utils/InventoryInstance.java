@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class InventoryInstance {
     public static void addItemMenu(Inventory inv, Integer pos, Material mat, String name, ArrayList<String> lore) {
-        inv.setItem(pos.intValue(), createGuiItem(mat, name, lore, Boolean.TRUE));
+        inv.setItem(pos, createGuiItem(mat, name, lore, true));
     }
 
     public static ItemStack createGuiItem(Material material, String name, ArrayList<String> lore, Boolean enhanced) {

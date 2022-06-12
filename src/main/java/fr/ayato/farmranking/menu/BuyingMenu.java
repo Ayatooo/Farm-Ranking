@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import java.util.List;
-import static fr.ayato.farmranking.menu.RankingMenu.centerTitle;
 
 public class BuyingMenu implements Listener {
 
@@ -23,7 +22,7 @@ public class BuyingMenu implements Listener {
         String title = Main.instance.getConfig().getString("BuyingMenu.title");
 
         //Create the inventory
-        Inventory buyPointsInv = Bukkit.createInventory(null, MenuSize, centerTitle(title));
+        Inventory buyPointsInv = Bukkit.createInventory(null, MenuSize, Utils.centerTitle(title));
 
         // Add the items to the inventory
         for (int i = 0; i < ItemsSize; i++) {
