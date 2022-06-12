@@ -1,6 +1,7 @@
 package fr.ayato.farmranking.menu;
 
 import com.massivecraft.factions.FPlayers;
+import fr.ayato.farmranking.GetGlass;
 import fr.ayato.farmranking.Main;
 import fr.ayato.farmranking.data.GetRankingMenuConfig;
 import fr.ayato.farmranking.utils.FactionObject;
@@ -33,6 +34,10 @@ public class RankingMenu implements CommandExecutor {
         int factionPoint = Utils.getFactionPoints(player);
         int menuSize = GetRankingMenuConfig.getMenuSize();
         int topFactionsSize = GetRankingMenuConfig.getTopFactionsSize();
+        ArrayList<String> loreReturn = new ArrayList<>();
+        ArrayList<String> loreSpace = new ArrayList<>();
+        loreReturn.add("§c§l↩");
+        loreSpace.add("");
 
         if ((Main.getInstance()).loadConfig.factionList.size() >= topFactionsSize) {
             List<FactionObject> factionList = new ArrayList<>();
@@ -57,26 +62,17 @@ public class RankingMenu implements CommandExecutor {
                 InventoryInstance.addItemMenu(farmInventory, place, TopFactionMaterial, factionNamePrefix + factionName + factionPointPrefix + factionPoints + factionPointSuffix, (ArrayList<String>) TopFactionLore);
 
             }
-            ArrayList<String> lore4 = new ArrayList<>();
-            lore4.add("§c§l↩");
-            ArrayList<String> lore5 = new ArrayList<>();
-            lore5.add("");
 
-            InventoryInstance.addItemMenu(farmInventory, 4, Material.PAPER, "§b§lTa faction possède §6§l" + factionPoint + " §bpoints !", lore5);
-            InventoryInstance.addItemMenu(farmInventory, 40, Material.WOOD_DOOR, "§cRetour", lore4);
-            InventoryInstance.addGlass(farmInventory, 0, Material.STAINED_GLASS_PANE, "§e☆");
-            InventoryInstance.addGlass(farmInventory, 1, Material.STAINED_GLASS_PANE, "§e☆");
-            InventoryInstance.addGlass(farmInventory, 9, Material.STAINED_GLASS_PANE, "§e☆");
-            InventoryInstance.addGlass(farmInventory, 7, Material.STAINED_GLASS_PANE, "§e☆");
-            InventoryInstance.addGlass(farmInventory, 8, Material.STAINED_GLASS_PANE, "§e☆");
-            InventoryInstance.addGlass(farmInventory, 17, Material.STAINED_GLASS_PANE, "§e☆");
-            InventoryInstance.addGlass(farmInventory, 27, Material.STAINED_GLASS_PANE, "§e☆");
-            InventoryInstance.addGlass(farmInventory, 36, Material.STAINED_GLASS_PANE, "§e☆");
-            InventoryInstance.addGlass(farmInventory, 37, Material.STAINED_GLASS_PANE, "§e☆");
-            InventoryInstance.addGlass(farmInventory, 35, Material.STAINED_GLASS_PANE, "§e☆");
-            InventoryInstance.addItemMenu(farmInventory, 42, Material.NETHER_STAR, "§eAcheter des points", lore5);
-            InventoryInstance.addGlass(farmInventory, 43, Material.STAINED_GLASS_PANE, "§e☆");
-            InventoryInstance.addGlass(farmInventory, 44, Material.STAINED_GLASS_PANE, "§e☆");
+            InventoryInstance.addItemMenu(farmInventory, 4, Material.PAPER, "§b§lTa faction possède §6§l" + factionPoint + " §bpoints !", loreSpace);
+            InventoryInstance.addItemMenu(farmInventory, 40, Material.WOOD_DOOR, "§cRetour", loreReturn);
+            InventoryInstance.addItemMenu(farmInventory, 42, Material.NETHER_STAR, "§eAcheter des points", loreSpace);
+
+            int glassPlaceSize = GetGlass.getGlassPlace().size();
+            String glassName = GetGlass.getGlassName();
+            for (int i = 0; i < glassPlaceSize; i++) {
+                List<Integer> glassPlace = GetGlass.getGlassPlace();
+                InventoryInstance.addGlass(farmInventory, glassPlace.get(i), Material.STAINED_GLASS_PANE, glassName);
+            }
             player.openInventory(farmInventory);
         } else{
             player.sendMessage("§e§lIdalia§b§lMc §f» §cIl faut qu'au moins 3 factions existent !");

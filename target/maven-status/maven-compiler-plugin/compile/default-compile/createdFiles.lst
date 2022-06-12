@@ -1,4 +1,5 @@
 fr\ayato\farmranking\data\GetBuyingMenuConfig.class
+fr\ayato\farmranking\GetGlass.class
 fr\ayato\farmranking\utils\config\ConfigJSON.class
 fr\ayato\farmranking\menu\BuyingMenu.class
 fr\ayato\farmranking\Main.class
@@ -9,7 +10,6 @@ fr\ayato\farmranking\utils\events\FactionEvents.class
 fr\ayato\farmranking\menu\RankingMenu.class
 fr\ayato\farmranking\utils\ClassementUtils.class
 fr\ayato\farmranking\menu\MenuInterract.class
-fr\ayato\farmranking\menu\LoreFarm.class
 fr\ayato\farmranking\menu\Utils.class
 fr\ayato\farmranking\utils\InventoryInstance.class
 fr\ayato\farmranking\utils\commands\EditPointCommand.class

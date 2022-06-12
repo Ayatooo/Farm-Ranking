@@ -15,7 +15,6 @@ import java.util.List;
 
 public class Main extends JavaPlugin {
     private static Economy econ = null;
-
     public ConfigJSON loadConfig = null;
     public ConfStorage configStorage;
     public static Main instance;
@@ -37,7 +36,6 @@ public class Main extends JavaPlugin {
         getCommand("farmpoint").setExecutor(new EditPointCommand());
         getServer().getPluginManager().registerEvents(new FactionEvents(), this);
         getServer().getPluginManager().registerEvents(new MenuInterract(), this);
-
         setupEconomy();
     }
 
@@ -62,5 +60,4 @@ public class Main extends JavaPlugin {
     public static Economy getEconomy() {
         return econ;
     }
-
 }
