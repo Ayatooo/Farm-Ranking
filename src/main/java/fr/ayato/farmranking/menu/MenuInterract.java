@@ -1,7 +1,6 @@
 package fr.ayato.farmranking.menu;
 
 import com.massivecraft.factions.FPlayers;
-import fr.ayato.farmranking.BuyPoints;
 import fr.ayato.farmranking.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -22,14 +21,14 @@ public class MenuInterract implements Listener {
     String command2;
 
     @EventHandler
-    public void interractFarmMenu(InventoryClickEvent e) {
+    public void interactFarmMenu(InventoryClickEvent e) {
         Inventory inv = e.getInventory();
         Player player = (Player) e.getWhoClicked();
 
         if(inv.getName().contains("Top Farm")) {
             if (e.getCurrentItem().getType() == Material.NETHER_STAR) {
                 player.closeInventory();
-                BuyPoints.buyingMenu(player);
+                BuyingMenu.openMenu(player);
             } else if (e.getCurrentItem().getType() == Material.WOOD_DOOR) {
                 player.closeInventory();
             }
@@ -38,7 +37,7 @@ public class MenuInterract implements Listener {
     }
 
     @EventHandler
-    public void interractBuyingMenu(InventoryClickEvent e) {
+    public void interactBuyingMenu(InventoryClickEvent e) {
         Inventory inv = e.getInventory();
         ItemStack current = e.getCurrentItem();
         Player player = (Player) e.getWhoClicked();

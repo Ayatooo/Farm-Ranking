@@ -1,0 +1,28 @@
+{
+  "factionList": [
+    {
+      "points": 100,
+      "factionName": "loll"
+    },
+    {
+      "points": 15,
+      "factionName": "first"
+    },
+    {
+      "points": 10,
+      "factionName": "second"
+    },
+    {
+      "points": 5,
+      "factionName": "third"
+    },
+    {
+      "points": 2,
+      "factionName": "last"
+    }
+  ],
+  "usage": "§7[§bFarm-Ranking§7] §f» §a/farmpoint <add/set> <faction> <point>",
+  "factionDoesNotExist": "§7[§bFarm-Ranking§7] §f» §cLa faction n'existe pas.",
+  "pointAdded": "§7[§bFarm-Ranking§7]§7 Vous venez d'ajouter §b%point% §7point(s) à la faction §b%faction%",
+  "pointSet": "§7[§bFarm-Ranking§7]§7 Vous venez de définir §b%point% §7point(s) à la faction §b%faction%"
+}
