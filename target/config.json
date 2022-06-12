@@ -1,24 +1,16 @@
 {
   "factionList": [
     {
-      "points": 100,
-      "factionName": "loll"
-    },
-    {
-      "points": 15,
+      "points": 0,
       "factionName": "first"
     },
     {
-      "points": 10,
+      "points": 0,
       "factionName": "second"
     },
     {
-      "points": 5,
+      "points": 0,
       "factionName": "third"
-    },
-    {
-      "points": 2,
-      "factionName": "last"
     }
   ],
   "usage": "§7[§bFarm-Ranking§7] §f» §a/farmpoint <add/set> <faction> <point>",

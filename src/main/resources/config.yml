@@ -50,21 +50,19 @@ RankingMenu :
         - "§7⦁ §f7 500 Points boutique §7(Chef)"
         - "§7⦁ §fTag §a§lFermier §7(Faction)"
     2:
-      material: "EMERALD"
+      material: "DIAMOND"
       place: 22
       lore:
         - ""
         - "§eRécompenses:"
-        - "§7⦁ §f7 500 Points boutique §7(Chef)"
-        - "§7⦁ §fTag §a§lFermier §7(Faction)"
+        - "§7⦁ §f5 000 Points boutique §7(Chef)"
     3:
-      material: "EMERALD"
+      material: "GOLD_INGOT"
       place: 24
       lore:
         - ""
         - "§eRécompenses:"
-        - "§7⦁ §f7 500 Points boutique §7(Chef)"
-        - "§7⦁ §fTag §a§lFermier §7(Faction)"
+        - "§7⦁ §f2 500 Points boutique §7(Chef)"
 Glass:
   place :
     - 0

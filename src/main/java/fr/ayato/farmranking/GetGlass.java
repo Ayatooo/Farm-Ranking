@@ -1,8 +1,6 @@
 package fr.ayato.farmranking;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import static fr.ayato.farmranking.Main.instance;
 
 public class GetGlass {
