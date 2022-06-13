@@ -48,7 +48,7 @@ public class ConfStorage {
             if (f.getName().equalsIgnoreCase("config.json")) {
                 (Main.getInstance()).loadConfig = deserialize(f);
                 if ((Main.getInstance()).loadConfig == null) {
-                    System.out.println("[IdaliaMc] Error, Configuration was corrupted, loaded default config!");
+                    System.out.println("Error, Configuration was corrupted, loaded default config!");
                     (Main.getInstance()).loadConfig = new ConfigJSON();
                 }
                 return;

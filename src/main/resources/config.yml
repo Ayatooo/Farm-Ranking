@@ -1,3 +1,5 @@
+messages :
+  xMinimumFactionMustExist : "§e§lIdalia§b§lMc §f» §cIl faut qu'au moins 3 factions existent !"
 BuyingMenu :
   title: "§e☆ §b§lAchat de points Farm §e☆"
   size: 27

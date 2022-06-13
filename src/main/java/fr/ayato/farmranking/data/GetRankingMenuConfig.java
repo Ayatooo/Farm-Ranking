@@ -54,4 +54,7 @@ public class GetRankingMenuConfig {
         return Main.getInstance().getConfig().getInt("RankingMenu.topFactions." + i + ".place");
     }
 
+    public static String getXMinimumFactionMustExist() {
+        return Main.getInstance().getConfig().getString("messages.xMinimumFactionMustExist");
+    }
 }

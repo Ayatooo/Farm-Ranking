@@ -75,7 +75,8 @@ public class RankingMenu implements CommandExecutor {
             }
             player.openInventory(farmInventory);
         } else{
-            player.sendMessage("§e§lIdalia§b§lMc §f» §cIl faut qu'au moins 3 factions existent !");
+            String xMinimumFactionMustExist = GetRankingMenuConfig.getXMinimumFactionMustExist();
+            player.sendMessage(xMinimumFactionMustExist);
         }
     }
 }

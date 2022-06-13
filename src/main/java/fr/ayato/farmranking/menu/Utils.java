@@ -9,23 +9,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Stream;
 
 public class Utils {
-    // Split a string with the ", " character and return it in a list
-    public static List<String> strToList(String string) {
-        List<String> list = new ArrayList<>();
-        Stream.of(string)
-                .map(s -> s.split(", "))
-                .flatMap(Stream::of)
-                .forEach(list::add);
-        return list;
-    }
 
     // Split a string with the "[" & the "]" characters and return it
     public static String splitStr(String string) {
