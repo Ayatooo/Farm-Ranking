@@ -15,8 +15,8 @@ public class FactionEvents implements Listener {
 
     @EventHandler
     public void onFactionCreate(FactionCreateEvent e) {
-        System.out.println("Faction créée : " + e.getFaction().getTag());
-        (Main.getInstance()).loadConfig.factionList.add(new FactionObject(0, e.getFaction().getTag()));
+        System.out.println("Faction créée : " + e.getFactionTag());
+        (Main.getInstance()).loadConfig.factionList.add(new FactionObject(0, e.getFactionTag()));
         ClassementUtils.sortList();
     }
 
