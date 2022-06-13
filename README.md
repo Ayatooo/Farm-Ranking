@@ -15,6 +15,9 @@ You can also configure the Buy-Points menu, the price and the number of points t
 
 ## How to use it ✨
 
+The main branch is the plugin working with FactionUUID plugin.
+The saber-faction branch is for the Saber faction plugin.
+
 Clone the project, or download the zip file and put the .jar into your plugins.
 
 Then in game, write /farm to open the ranking menu, or /farmpoint to see how to set / add points to a faction
