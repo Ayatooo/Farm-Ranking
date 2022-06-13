@@ -7,3 +7,5 @@ commands:
     permissions: farm.use
   farmpoint:
     permissions: farmpoint.set
+  farmachat:
+    permissions: farmachat.use

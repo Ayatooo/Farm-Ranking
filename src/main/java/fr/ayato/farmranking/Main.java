@@ -1,5 +1,6 @@
 package fr.ayato.farmranking;
 
+import fr.ayato.farmranking.menu.BuyingMenu;
 import fr.ayato.farmranking.menu.RankingMenu;
 import fr.ayato.farmranking.menu.MenuInterract;
 import fr.ayato.farmranking.utils.commands.EditPointCommand;
@@ -32,6 +33,7 @@ public class Main extends JavaPlugin {
         this.configStorage.loadConfig();
         getCommand("farm").setExecutor(new RankingMenu());
         getCommand("farmpoint").setExecutor(new EditPointCommand());
+        getCommand("farmachat").setExecutor(new BuyingMenu());
         getServer().getPluginManager().registerEvents(new FactionEvents(), this);
         getServer().getPluginManager().registerEvents(new MenuInterract(), this);
         setupEconomy();

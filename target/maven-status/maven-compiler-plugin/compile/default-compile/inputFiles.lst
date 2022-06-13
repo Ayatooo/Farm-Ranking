@@ -1,5 +1,6 @@
+C:\Users\louis\OneDrive\Documents\GitHub\Farm-Ranking\src\main\java\fr\ayato\farmranking\data\GetBuyingMenuConfig.java
 C:\Users\louis\OneDrive\Documents\GitHub\Farm-Ranking\src\main\java\fr\ayato\farmranking\utils\events\FactionEvents.java
-C:\Users\louis\OneDrive\Documents\GitHub\Farm-Ranking\src\main\java\fr\ayato\farmranking\data\GetConfigYML.java
+C:\Users\louis\OneDrive\Documents\GitHub\Farm-Ranking\src\main\java\fr\ayato\farmranking\menu\Utils.java
 C:\Users\louis\OneDrive\Documents\GitHub\Farm-Ranking\src\main\java\fr\ayato\farmranking\utils\ClassementUtils.java
 C:\Users\louis\OneDrive\Documents\GitHub\Farm-Ranking\src\main\java\fr\ayato\farmranking\menu\MenuInterract.java
 C:\Users\louis\OneDrive\Documents\GitHub\Farm-Ranking\src\main\java\fr\ayato\farmranking\Main.java
@@ -7,7 +8,8 @@ C:\Users\louis\OneDrive\Documents\GitHub\Farm-Ranking\src\main\java\fr\ayato\far
 C:\Users\louis\OneDrive\Documents\GitHub\Farm-Ranking\src\main\java\fr\ayato\farmranking\utils\config\ConfStorage.java
 C:\Users\louis\OneDrive\Documents\GitHub\Farm-Ranking\src\main\java\fr\ayato\farmranking\menu\BuyingMenu.java
 C:\Users\louis\OneDrive\Documents\GitHub\Farm-Ranking\src\main\java\fr\ayato\farmranking\menu\RankingMenu.java
-C:\Users\louis\OneDrive\Documents\GitHub\Farm-Ranking\src\main\java\fr\ayato\farmranking\menu\LoreFarm.java
+C:\Users\louis\OneDrive\Documents\GitHub\Farm-Ranking\src\main\java\fr\ayato\farmranking\GetGlass.java
+C:\Users\louis\OneDrive\Documents\GitHub\Farm-Ranking\src\main\java\fr\ayato\farmranking\data\GetRankingMenuConfig.java
 C:\Users\louis\OneDrive\Documents\GitHub\Farm-Ranking\src\main\java\fr\ayato\farmranking\utils\commands\EditPointCommand.java
 C:\Users\louis\OneDrive\Documents\GitHub\Farm-Ranking\src\main\java\fr\ayato\farmranking\utils\FactionObject.java
 C:\Users\louis\OneDrive\Documents\GitHub\Farm-Ranking\src\main\java\fr\ayato\farmranking\utils\InventoryInstance.java

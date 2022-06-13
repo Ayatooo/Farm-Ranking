@@ -25,14 +25,16 @@ public class MenuInterract implements Listener {
         Inventory inv = e.getInventory();
         Player player = (Player) e.getWhoClicked();
 
-        if(inv.getName().contains("Top Farm")) {
-            if (e.getCurrentItem().getType() == Material.NETHER_STAR) {
-                player.closeInventory();
-                BuyingMenu.openMenu(player);
-            } else if (e.getCurrentItem().getType() == Material.WOOD_DOOR) {
-                player.closeInventory();
+        if (e.getClickedInventory() != null) {
+            if (inv.getName().contains("Top Farm")) {
+                if (e.getCurrentItem().getType() == Material.NETHER_STAR) {
+                    player.closeInventory();
+                    BuyingMenu.openMenu(player);
+                } else if (e.getCurrentItem().getType() == Material.WOOD_DOOR) {
+                    player.closeInventory();
+                }
+                e.setCancelled(true);
             }
-            e.setCancelled(true);
         }
     }
 
@@ -43,31 +45,34 @@ public class MenuInterract implements Listener {
         Player player = (Player) e.getWhoClicked();
         String title = Main.instance.getConfig().getString("BuyingMenu.title");
 
-        if (inv.getName().contains(title)) {
-            if (current.hasItemMeta()) {
-                if (current.getType() != Material.WOOD_DOOR) {
-                    List<String> itemsName = GetBuyingMenuConfig.getBuyingMenuItemsName();
-                    int index = -1;
-                    for (int i = 0; i < itemsName.size(); i++) {
-                        if (current.getItemMeta().getDisplayName().equals(itemsName.get(i))) {
-                            index = i;
+
+        if (e.getClickedInventory() != null) {
+            if (inv.getName().contains(title)) {
+                if (current.hasItemMeta()) {
+                    if (current.getType() != Material.WOOD_DOOR) {
+                        List<String> itemsName = GetBuyingMenuConfig.getBuyingMenuItemsName();
+                        int index = -1;
+                        for (int i = 0; i < itemsName.size(); i++) {
+                            if (current.getItemMeta().getDisplayName().equals(itemsName.get(i))) {
+                                index = i;
+                            }
                         }
+                        int price = GetBuyingMenuConfig.getOneBuyingMenuPrice(index);
+                        int points = GetBuyingMenuConfig.getBuyingMenuNumberOfPoints(index);
+                        if (Main.getEconomy().has(player, price + 1)) {
+                            this.command = "eco take " + player.getName() + " " + price;
+                            Bukkit.dispatchCommand(this.console, this.command);
+                            this.command = "farmpoint add " + FPlayers.getInstance().getByPlayer(player).getFaction().getTag() + " " + points;
+                            Bukkit.dispatchCommand(this.console, this.command);
+                        } else {
+                            player.sendMessage("§cVous n'avez pas assez d'argent pour acheter " + points + " §cpoints");
+                        }
+                    } else if (current.getType() == Material.WOOD_DOOR) {
+                        player.closeInventory();
+                        openMenu(player);
                     }
-                    int price = GetBuyingMenuConfig.getOneBuyingMenuPrice(index);
-                    int points = GetBuyingMenuConfig.getBuyingMenuNumberOfPoints(index);
-                    if (Main.getEconomy().has(player, price + 1)) {
-                        this.command = "eco take " + player.getName() + " " + price;
-                        Bukkit.dispatchCommand(this.console, this.command);
-                        this.command = "farmpoint add " + FPlayers.getInstance().getByPlayer(player).getFaction().getTag() + " " + points;
-                        Bukkit.dispatchCommand(this.console, this.command);
-                    } else {
-                        player.sendMessage("§cVous n'avez pas assez d'argent pour acheter " + points + " §cpoints");
-                    }
-                } else if (current.getType() == Material.WOOD_DOOR) {
-                    player.closeInventory();
-                    openMenu(player);
+                    e.setCancelled(true);
                 }
-                e.setCancelled(true);
             }
         }
     }

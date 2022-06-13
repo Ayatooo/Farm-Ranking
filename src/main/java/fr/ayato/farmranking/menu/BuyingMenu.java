@@ -4,12 +4,23 @@ import fr.ayato.farmranking.Main;
 import fr.ayato.farmranking.data.GetBuyingMenuConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import java.util.List;
 
-public class BuyingMenu implements Listener {
+public class BuyingMenu implements CommandExecutor {
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        Player player = (Player)sender;
+        if (sender != null) {
+            BuyingMenu.openMenu(player);
+        }
+        return false;
+    }
 
     public static void openMenu(Player player) {
         //Get the data from the config file
