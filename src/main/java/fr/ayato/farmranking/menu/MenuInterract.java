@@ -57,15 +57,29 @@ public class MenuInterract implements Listener {
                                 index = i;
                             }
                         }
-                        int price = GetBuyingMenuConfig.getOneBuyingMenuPrice(index);
                         int points = GetBuyingMenuConfig.getBuyingMenuNumberOfPoints(index);
-                        if (Main.getEconomy().has(player, price + 1)) {
-                            this.command = "eco take " + player.getName() + " " + price;
-                            Bukkit.dispatchCommand(this.console, this.command);
-                            this.command = "farmpoint add " + FPlayers.getInstance().getByPlayer(player).getFaction().getTag() + " " + points;
-                            Bukkit.dispatchCommand(this.console, this.command);
-                        } else {
-                            player.sendMessage("§cVous n'avez pas assez d'argent pour acheter " + points + " §cpoints");
+                        Inventory playerInv = player.getInventory();
+
+                        List<String> coinLore = Main.instance.getConfig().getStringList("coinLore");
+
+                        for (int i = 0; i < playerInv.getSize(); i++) {
+                            if (playerInv.getItem(i) != null) {
+                                if (playerInv.getItem(i).hasItemMeta()) {
+                                    if (playerInv.getItem(i).getItemMeta().getLore().equals(coinLore)) {
+                                        if (playerInv.getItem(i).getAmount() >= points || playerInv.getItem(i).getAmount() == points) {
+                                            if (points == 1 && playerInv.getItem(i).getAmount() == 1 || points == 5 && playerInv.getItem(i).getAmount() == 5 || points == 15 && playerInv.getItem(i).getAmount() == 15) {
+                                                playerInv.clear(i);
+                                            } else {
+                                                playerInv.getItem(i).setAmount(playerInv.getItem(i).getAmount() - points);
+                                            }
+                                            this.command = "farmpoint add " + FPlayers.getInstance().getByPlayer(player).getFaction().getTag() + " " + points;
+                                            Bukkit.dispatchCommand(this.console, this.command);
+                                        } else {
+                                            player.sendMessage("§cVous n'avez pas assez de coins pour acheter " + points + " §cpoints");
+                                        }
+                                    }
+                                }
+                            }
                         }
                     } else if (current.getType() == Material.WOOD_DOOR) {
                         player.closeInventory();

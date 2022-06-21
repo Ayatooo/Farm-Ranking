@@ -7,13 +7,10 @@ import fr.ayato.farmranking.utils.commands.EditPointCommand;
 import fr.ayato.farmranking.utils.config.ConfStorage;
 import fr.ayato.farmranking.utils.config.ConfigJSON;
 import fr.ayato.farmranking.utils.events.FactionEvents;
-import net.milkbowl.vault.economy.Economy;
 import org.bukkit.ChatColor;
-import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
-    private static Economy econ = null;
     public ConfigJSON loadConfig = null;
     public ConfStorage configStorage;
     public static Main instance;
@@ -36,7 +33,6 @@ public class Main extends JavaPlugin {
         getCommand("farmachat").setExecutor(new BuyingMenu());
         getServer().getPluginManager().registerEvents(new FactionEvents(), this);
         getServer().getPluginManager().registerEvents(new MenuInterract(), this);
-        setupEconomy();
     }
 
     public void onDisable() {
@@ -45,19 +41,5 @@ public class Main extends JavaPlugin {
         System.out.println("--------------------");
         this.configStorage.saveConfig();
         saveDefaultConfig();
-    }
-
-    private boolean setupEconomy() {
-        if (getServer().getPluginManager().getPlugin("Vault") == null)
-            return false;
-        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-        if (rsp == null)
-            return false;
-        econ = rsp.getProvider();
-        return (econ != null);
-    }
-
-    public static Economy getEconomy() {
-        return econ;
     }
 }
